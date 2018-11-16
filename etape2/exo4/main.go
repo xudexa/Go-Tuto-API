@@ -7,10 +7,12 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [contact](
+CREATE TABLE [video](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[nom] [nvarchar](255) NOT NULL,
-	[Prenom] [nvarchar](255) NULL,
+	[titre] [nvarchar](255) NOT NULL,
+	[dateSortie] [smalldatetime] NULL,
+	[realisateur] [nvarchar](255) NOT NULL,
+	[synopsys] [nvarchar](255)  NULL,
 	PRIMARY KEY (ID)
 ) ON [PRIMARY]
 
@@ -20,6 +22,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"time"
 
 	_ "github.com/denisenkom/go-mssqldb"
 )
@@ -38,6 +41,14 @@ type stContact struct {
 	ID     int
 	Nom    string
 	Prenom string
+}
+
+type stVideo struct {
+	ID         int
+	Titre      string
+	DateSortie time.Time
+	Realisteur string
+	Synopsis   string
 }
 
 func main() {
@@ -184,6 +195,96 @@ func deleteContact(db *sql.DB, id int) error {
 	if err == nil {
 
 		result, errExec := dbtransact.Exec("DELETE FROM contact where id=$1 ", id)
+		if errExec == nil {
+			fmt.Println(result.RowsAffected())
+		} else {
+			err = errExec
+			dbtransact.Rollback()
+		}
+
+		dbtransact.Commit()
+	} else {
+		err = errTransac
+	}
+
+	return err
+}
+
+//*
+
+//*
+
+//*
+
+//*
+
+//*
+
+func getVideo(db *sql.DB, id int) error {
+	var video stVideo
+	var err error
+
+	row := db.QueryRow("SELECT titre,datesortie,realisateur,synopsys FROM video WHERE id = $1;", id)
+	errScan := row.Scan(&video.Titre, &video.DateSortie, &video.Realisteur, &video.Synopsis)
+	if errScan == nil {
+		fmt.Println(fmt.Sprintf("ID : %d, Titre : %s, Date de sortie: %s, Réalisateur : %s, Synopsys : %s", id, video.Titre, video.DateSortie, video.Realisteur, video.Synopsis))
+	} else {
+		err = errScan
+	}
+
+	return err
+}
+
+func createVideo(db *sql.DB, video *stVideo) error {
+	var err error
+
+	dbtransact, errTransac := db.Begin()
+	if err == nil {
+
+		result, errExec := dbtransact.Exec("INSERT INTO video (titre,datesortie,realisateur,synopsys) values ($1,$2,$3,$4)", video.Titre, video.DateSortie, video.Realisteur, video.Synopsis)
+		if errExec == nil {
+			fmt.Println(result.LastInsertId())
+			fmt.Println(result.RowsAffected())
+		} else {
+			err = errExec
+			dbtransact.Rollback()
+		}
+
+		dbtransact.Commit()
+	} else {
+		err = errTransac
+	}
+
+	return err
+}
+
+func updateVideo(db *sql.DB, id int, video *stVideo) error {
+	var err error
+	dbtransact, errTransac := db.Begin()
+	if err == nil {
+
+		result, errExec := dbtransact.Exec("INSERT video set titre=$1, datesortie=$2, realisateur=$3, synopsys=$4 where id=$3 ", video.Titre, video.DateSortie, video.Realisteur, video.Synopsis, id)
+		if errExec == nil {
+			fmt.Println(result.RowsAffected())
+		} else {
+			err = errExec
+			dbtransact.Rollback()
+		}
+
+		dbtransact.Commit()
+	} else {
+		err = errTransac
+	}
+
+	return err
+}
+
+func deleteVideo(db *sql.DB, id int) error {
+	var err error
+	dbtransact, errTransac := db.Begin()
+	if err == nil {
+
+		result, errExec := dbtransact.Exec("DELETE FROM video where id=$1 ", id)
 		if errExec == nil {
 			fmt.Println(result.RowsAffected())
 		} else {
