@@ -14,3 +14,17 @@ type StrServeurSetting struct {
 }
 
 var settings StrServeurSetting
+
+// LoadSettings : Charge la configuration
+func LoadSettings() {
+	settings.Environnement.Name = "Dev"
+	settings.Environnement.HTTP.ListenPort = 8882
+	settings.Environnement.HTTP.Path = "/dev"
+	settings.Environnement.ModeDebug = true
+	settings.Environnement.LevelLogger = 5
+}
+
+// GetSettings : Renvoi la structure charger
+func GetSettings() StrServeurSetting {
+	return settings
+}
