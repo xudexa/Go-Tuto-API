@@ -58,6 +58,46 @@ func openDB() (*sql.DB, error) {
 	return db, err
 }
 
+func listecontacts(db *sql.DB) error {
+	var nom string
+	var prenom string
+	var id int
+	var err error
+
+	rows, errQuery := db.Query("Select * from contact")
+	if errQuery == nil {
+		defer rows.Close()
+		for rows.Next() {
+
+			errScan := rows.Scan(&id, &nom, &prenom)
+			if errScan == nil {
+				fmt.Println(fmt.Sprintf("ID : %d, Nom : %s, Prénom: %s", id, nom, prenom))
+			} else {
+				err = errScan
+			}
+		}
+	} else {
+		err = errQuery
+	}
+	return err
+}
+
+func getContact(db *sql.DB, id int) error {
+	var nom string
+	var prenom string
+	var err error
+
+	row := db.QueryRow("SELECT nom,prenom FROM contact WHERE id = $1;", id)
+	errScan := row.Scan(&nom, &prenom)
+	if errScan == nil {
+		fmt.Println(fmt.Sprintf("ID : %d, Nom : %s, Prénom: %s", id, nom, prenom))
+	} else {
+		err = errScan
+	}
+
+	return err
+}
+
 func main() {
 
 	var db *sql.DB
@@ -66,34 +106,9 @@ func main() {
 	db, err = openDB()
 	defer db.Close()
 	if err == nil {
-		var nom string
-		var prenom string
-		var id int
-
-		rows, errQuery := db.Query("Select * from contact")
-		if errQuery == nil {
-			defer rows.Close()
-			for rows.Next() {
-
-				errScan := rows.Scan(&id, &nom, &prenom)
-				if errScan == nil {
-					fmt.Println(fmt.Sprintf("ID : %d, Nom : %s, Prénom: %s", id, nom, prenom))
-				} else {
-					err = errScan
-				}
-			}
-		} else {
-			err = errQuery
-		}
-
-		fmt.Printf("Lecture du contact 1 \n")
-
-		row := db.QueryRow("SELECT * FROM contact WHERE id = $1;", 1)
-		errScan := row.Scan(&id, &nom, &prenom)
-		if errScan == nil {
-			fmt.Println(fmt.Sprintf("ID : %d, Nom : %s, Prénom: %s", id, nom, prenom))
-		} else {
-			err = errScan
+		err = listecontacts(db)
+		if err == nil {
+			err = getContact(db, 1)
 		}
 	}
 
