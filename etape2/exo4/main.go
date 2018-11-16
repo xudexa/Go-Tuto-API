@@ -27,7 +27,7 @@ import (
 	_ "github.com/denisenkom/go-mssqldb"
 )
 
-type databaseSetting struct {
+type strDatabaseSetting struct {
 	SettingName  string `json:"name"`
 	DatabaseName string `json:"dbName"`
 	HostName     string `json:"server"`
@@ -37,13 +37,13 @@ type databaseSetting struct {
 	Password     string `json:"password"`
 }
 
-type stContact struct {
+type strContact struct {
 	ID     int
 	Nom    string
 	Prenom string
 }
 
-type stVideo struct {
+type strVideo struct {
 	ID         int
 	Titre      string
 	DateSortie time.Time
@@ -59,7 +59,7 @@ func main() {
 	db, err = openDB()
 	defer db.Close()
 	if err == nil {
-		var contact stContact
+		var contact strContact
 
 		contact.Nom = "Dupond"
 		contact.Prenom = "Alain"
@@ -80,7 +80,7 @@ func main() {
 }
 
 func openDB() (*sql.DB, error) {
-	var dbSetting databaseSetting
+	var dbSetting strDatabaseSetting
 
 	dbSetting.SettingName = "MaConfig"
 	dbSetting.Driver = "mssql"
@@ -105,8 +105,8 @@ func openDB() (*sql.DB, error) {
 
 func listecontacts(db *sql.DB) error {
 
-	var contact stContact
-	var lstContacts []stContact
+	var contact strContact
+	var lstContacts []strContact
 	var err error
 
 	rows, errQuery := db.Query("Select * from contact")
@@ -131,7 +131,7 @@ func listecontacts(db *sql.DB) error {
 }
 
 func getContact(db *sql.DB, id int) error {
-	var contact stContact
+	var contact strContact
 	var err error
 
 	row := db.QueryRow("SELECT nom,prenom FROM contact WHERE id = $1;", id)
@@ -145,7 +145,7 @@ func getContact(db *sql.DB, id int) error {
 	return err
 }
 
-func createContact(db *sql.DB, contact *stContact) error {
+func createContact(db *sql.DB, contact *strContact) error {
 	var err error
 
 	dbtransact, errTransac := db.Begin()
@@ -168,7 +168,7 @@ func createContact(db *sql.DB, contact *stContact) error {
 	return err
 }
 
-func updateContact(db *sql.DB, id int, contact *stContact) error {
+func updateContact(db *sql.DB, id int, contact *strContact) error {
 	var err error
 	dbtransact, errTransac := db.Begin()
 	if err == nil {
@@ -210,18 +210,8 @@ func deleteContact(db *sql.DB, id int) error {
 	return err
 }
 
-//*
-
-//*
-
-//*
-
-//*
-
-//*
-
 func getVideo(db *sql.DB, id int) error {
-	var video stVideo
+	var video strVideo
 	var err error
 
 	row := db.QueryRow("SELECT titre,datesortie,realisateur,synopsys FROM video WHERE id = $1;", id)
@@ -235,7 +225,7 @@ func getVideo(db *sql.DB, id int) error {
 	return err
 }
 
-func createVideo(db *sql.DB, video *stVideo) error {
+func createVideo(db *sql.DB, video *strVideo) error {
 	var err error
 
 	dbtransact, errTransac := db.Begin()
@@ -258,7 +248,7 @@ func createVideo(db *sql.DB, video *stVideo) error {
 	return err
 }
 
-func updateVideo(db *sql.DB, id int, video *stVideo) error {
+func updateVideo(db *sql.DB, id int, video *strVideo) error {
 	var err error
 	dbtransact, errTransac := db.Begin()
 	if err == nil {

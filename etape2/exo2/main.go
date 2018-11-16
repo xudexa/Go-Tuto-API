@@ -24,7 +24,7 @@ import (
 	_ "github.com/denisenkom/go-mssqldb"
 )
 
-type databaseSetting struct {
+type strDatabaseSetting struct {
 	SettingName  string `json:"name"`
 	DatabaseName string `json:"dbName"`
 	HostName     string `json:"server"`
@@ -34,14 +34,14 @@ type databaseSetting struct {
 	Password     string `json:"password"`
 }
 
-type stContact struct {
+type strContact struct {
 	ID     int
 	Nom    string
 	Prenom string
 }
 
 func openDB() (*sql.DB, error) {
-	var dbSetting databaseSetting
+	var dbSetting strDatabaseSetting
 
 	dbSetting.SettingName = "MaConfig"
 	dbSetting.Driver = "mssql"
@@ -66,8 +66,8 @@ func openDB() (*sql.DB, error) {
 
 func listecontacts(db *sql.DB) error {
 
-	var contact stContact
-	var lstContacts []stContact
+	var contact strContact
+	var lstContacts []strContact
 	var err error
 
 	rows, errQuery := db.Query("Select * from contact")
@@ -92,7 +92,7 @@ func listecontacts(db *sql.DB) error {
 }
 
 func getContact(db *sql.DB, id int) error {
-	var contact stContact
+	var contact strContact
 	var err error
 
 	row := db.QueryRow("SELECT nom,prenom FROM contact WHERE id = $1;", id)
