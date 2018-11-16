@@ -1,0 +1,11 @@
+{
+    "environnement":{
+        "name" : "Dev",
+        "http" : {
+            "listenPort":8882,
+            "path" : "/dev"
+        },
+        "modeDebug" : true,
+        "levelLogger" : 5
+    }
+}
