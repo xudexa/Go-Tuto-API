@@ -34,6 +34,12 @@ type databaseSetting struct {
 	Password     string `json:"password"`
 }
 
+type stContact struct {
+	ID     int
+	Nom    string
+	Prenom string
+}
+
 func openDB() (*sql.DB, error) {
 	var dbSetting databaseSetting
 
@@ -59,9 +65,9 @@ func openDB() (*sql.DB, error) {
 }
 
 func listecontacts(db *sql.DB) error {
-	var nom string
-	var prenom string
-	var id int
+
+	var contact stContact
+	var lstContacts []stContact
 	var err error
 
 	rows, errQuery := db.Query("Select * from contact")
@@ -69,9 +75,12 @@ func listecontacts(db *sql.DB) error {
 		defer rows.Close()
 		for rows.Next() {
 
-			errScan := rows.Scan(&id, &nom, &prenom)
+			errScan := rows.Scan(&contact.ID, &contact.Nom, &contact.Prenom)
 			if errScan == nil {
-				fmt.Println(fmt.Sprintf("ID : %d, Nom : %s, Prénom: %s", id, nom, prenom))
+				// alimentation d'un taleau de contact
+				lstContacts = append(lstContacts, contact)
+
+				fmt.Println(fmt.Sprintf("ID : %d, Nom : %s, Prénom: %s", contact.ID, contact.Nom, contact.Prenom))
 			} else {
 				err = errScan
 			}
@@ -83,14 +92,13 @@ func listecontacts(db *sql.DB) error {
 }
 
 func getContact(db *sql.DB, id int) error {
-	var nom string
-	var prenom string
+	var contact stContact
 	var err error
 
 	row := db.QueryRow("SELECT nom,prenom FROM contact WHERE id = $1;", id)
-	errScan := row.Scan(&nom, &prenom)
+	errScan := row.Scan(&contact.Nom, &contact.Prenom)
 	if errScan == nil {
-		fmt.Println(fmt.Sprintf("ID : %d, Nom : %s, Prénom: %s", id, nom, prenom))
+		fmt.Println(fmt.Sprintf("ID : %d, Nom : %s, Prénom: %s", id, contact.Nom, contact.Prenom))
 	} else {
 		err = errScan
 	}
