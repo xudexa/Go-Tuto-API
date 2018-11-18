@@ -1,0 +1,35 @@
+[
+    {
+    "environnement":{
+        "name" : "Dev",
+        "http" : {
+            "listenPort":8882,
+            "path" : "/dev"
+        },
+        "modeDebug" : true,
+        "levelLogger" : 5
+        }
+    },
+    {
+    "environnement":{
+        "name" : "PreProd",
+        "http" : {
+            "listenPort":8882,
+            "path" : "/preprod"
+        },
+        "modeDebug" : true,
+        "levelLogger" : 4
+        }
+    },
+    {
+        "environnement":{
+            "name" : "Prod",
+            "http" : {
+                "listenPort":8882,
+                "path" : "/prod"
+            },
+            "modeDebug" : false,
+            "levelLogger" : 4
+            }
+        }
+]
