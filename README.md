@@ -33,6 +33,7 @@ Avant de commencer il faut définir nos ressources (routes) et le fonctionnement
 **Aides :**
 
 > Le routeur est géré avec le routeur du package gorilla/mux.
+
 > A l’instanciation du routeur StrictSlash() lorsqu’il est à true redirige les routes du types /contacts/ vers /contacts.
 
 Pour définir une route nous utilisons plusieurs fonctions: 
