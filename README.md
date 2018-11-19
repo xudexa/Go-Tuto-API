@@ -1,6 +1,7 @@
-#Création d’un Web Service simpliste en GO
+# Création d’un Web Service simpliste en GO
 
 Description :
+
 Web Service de gestion d’une Vidéothèque avec gestion des prêts.
 Utilisation au maximum des package de base du Go à quelques exceptions.
 
@@ -10,8 +11,8 @@ Le besoin :
 -	Lister nos contacts
 -	CRUD d’un contact
 -	Gestion des prêts :
-o	Prêt et Retour d’une vidéo
-o	Connaitre le stock de notre vidéothèque
+	o	Prêt et Retour d’une vidéo
+	o	Connaitre le stock de notre vidéothèque
 
 Le projet va s’orienter autour de ce besoin en se découpant en plusieurs exercices simples qui donneront forme à notre Web Service.
 
