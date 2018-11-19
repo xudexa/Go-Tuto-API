@@ -1,7 +1,5 @@
 # Création d’un Web Service simpliste en GO
-
-Description :
-
+## Description :
 Web Service de gestion d’une Vidéothèque avec gestion des prêts.
 Utilisation au maximum des package de base du Go à quelques exceptions.
 
@@ -92,6 +90,7 @@ Exercice 2 :
 -	Réaliser une fonction pour lire un enregistrement
 
 Aides : 
+```
 type DatabaseSetting struct {
     SettingName  string 
     Type         string 
@@ -102,7 +101,7 @@ type DatabaseSetting struct {
     User         string 
     Password     string 
 }
-
+```
 
 Exercice 3 :
 -	Ajouter / modifier / Supprimer des enregistrements
