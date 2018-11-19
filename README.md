@@ -108,8 +108,8 @@ type DatabaseSetting struct {
 - Ajouter / modifier / Supprimer des enregistrements
 #### Exercice 4 :
 - Prérequis exercice précédent.
--	Modéliser la vidéothèque 
--	Définir un ensemble de fonctions répondant au CRUD pour la vidéothèque
+- Modéliser la vidéothèque 
+- Définir un ensemble de fonctions répondant au CRUD pour la vidéothèque
  
 ### 3.	Réaliser un package
 
@@ -157,29 +157,32 @@ type ServeurSetting struct {
         "levelLogger" : 5
     }
 }
-	Attention aux déclarations de l’import des packages.
+```
 
-Exercice 3 :
--	Reprendre l’exercice 2 en ajoutant :
-o	Plusieurs configurations d’environnement
-o	En modifiant la fonction de chargement en passant en paramètre d’entrée le nom de la configuration à charger
+> Attention aux déclarations de l’import des packages.
+
+#### Exercice 3 :
+- Reprendre l’exercice 2 en ajoutant :
+	- Plusieurs configurations d’environnement
+	- En modifiant la fonction de chargement en passant en paramètre d’entrée le nom de la configuration à charger
  
 ### 4.	Packaging et assemblage des étapes précédentes pour réaliser notre web service
 
-Exercice 1 :
--	Prérequis :
-o	Exercice 4 de l’étape 1
-o	Exercice 4 de l’étape 3
--	Packager l’ensembles des fonctions appelé par le router dans un package « controlers »
--	Package la gestion des routes dans un package « routes »
--	Refaire le lancement du web service sur le port d’écoute en paramètre
-Exercice 2 :
--	Prérequis exercice précédent.
--	Packager les structures dans un package : « models »
--	Packager les requêtes dans un package : « dbacces »
--	Réaliser la connexion de la base de données avant le lancement du Web service avec les informations de connexion inscrites dans le paramétrage.
-Exercice 3 :
--	Prérequis exercice précédent.
--	Alimenter vos fonctions CRUD du package « controllers » avant de renvoyer la réponse formatée.
-Exercice 4 :
--	Mettre en place les routes et la gestion des prêts / retour de vos vidéos.
+#### Exercice 1 :
+- Prérequis :
+	- Exercice 4 de l’étape 1
+	- Exercice 4 de l’étape 3
+- Packager l’ensembles des fonctions appelé par le router dans un package « controlers »
+- Package la gestion des routes dans un package « routes »
+- Refaire le lancement du web service sur le port d’écoute en paramètre
+
+#### Exercice 2 :
+- Prérequis exercice précédent.
+- Packager les structures dans un package : « models »
+- Packager les requêtes dans un package : « dbacces »
+- Réaliser la connexion de la base de données avant le lancement du Web service avec les informations de connexion inscrites dans le paramétrage.
+#### Exercice 3 :
+- Prérequis exercice précédent.
+- Alimenter vos fonctions CRUD du package « controllers » avant de renvoyer la réponse formatée.
+#### Exercice 4 :
+- Mettre en place les routes et la gestion des prêts / retour de vos vidéos.
