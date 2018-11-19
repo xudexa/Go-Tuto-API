@@ -4,13 +4,13 @@ Web Service de gestion d’une Vidéothèque avec gestion des prêts.
 Utilisation au maximum des package de base du Go à quelques exceptions.
 
 **Le besoin :**
--	Lister les films de la vidéothèque (avec filtre et tri)
--	CRUD d’une vidéo (Create, Read, Update, Delete)
--	Lister nos contacts
--	CRUD d’un contact
--	Gestion des prêts :
-	o	Prêt et Retour d’une vidéo
-	o	Connaitre le stock de notre vidéothèque
+- Lister les films de la vidéothèque (avec filtre et tri)
+- CRUD d’une vidéo (Create, Read, Update, Delete)
+- Lister nos contacts
+- CRUD d’un contact
+- Gestion des prêts :
+	- Prêt et Retour d’une vidéo
+	- Connaitre le stock de notre vidéothèque
 
 Le projet va s’orienter autour de ce besoin en se découpant en plusieurs exercices simples qui donneront forme à notre Web Service.
 
@@ -20,32 +20,32 @@ NB : Le correctif de chaque exercice est mis à disposition ici :
 ### 1.	Création d’un serveur web et de ses routes associées (utilisation du package gorilla/mux).
 
 Pour rappel, d’un point vu purement conventionnel les méthodes suivantes, pour le CRUD, sont associées :
--	PUT : Create
--	POST : Update
--	GET : Read
--	DELETE : no coment
+- PUT : Create
+- POST : Update
+- GET : Read
+- DELETE : no coment
 Avant de commencer il faut définir nos ressources (routes) et le fonctionnement de notre Web Service :
--	Routes pour gérer les vidéos
--	Routes pour gérer les contacts
--	Routes pour gérer les prêts
+- Routes pour gérer les vidéos
+- Routes pour gérer les contacts
+- Routes pour gérer les prêts
 
-Exercice 1 :
+#### Exercice 1 :
 -	Création d’un serveur web sur un port d’écoute en l’interrogeant, le programme doit nous retourner un message « Hello Ernesto ».
 Aides :
 Le routeur est géré avec le routeur du package gorilla/mux.
 A l’instanciation du routeur StrictSlash() lorsqu’il est à true redirige les routes du types /contacts/ vers /contacts.
 Pour définir une route nous utilisons plusieurs fonctions: 
--	Methods() définit la méthode gérer par notre route(GET, POST, PUT, …). 
--	Path() correspond à la route à laquelle on veut faire correspondre notre action. 
--	Name() est le nom que l’on souhaite donner à notre route. 
--	HandlerFunc() spécifie la fonction à laquelle cette route est liée.
+- Methods() définit la méthode gérer par notre route(GET, POST, PUT, …). 
+- Path() correspond à la route à laquelle on veut faire correspondre notre action. 
+- Name() est le nom que l’on souhaite donner à notre route. 
+- HandlerFunc() spécifie la fonction à laquelle cette route est liée.
 
-Exercice 2 :
--	Prérequis exercice précédent
--	Récupération du/des paramètre(s) d’une demande à notre web service.
--	Des routes un peu plus concrètes pour les 5 méthodes du CRUD qui retournerons un simple message différent avec le/les paramètre(s) passé(s) et le statut approprié.
-Aides :
-La fonction mux.Vars(*http.Request) retourne un tableau associatif de chaine des paramètres passé en paramètre.
+#### Exercice 2 :
+- Prérequis exercice précédent
+- Récupération du/des paramètre(s) d’une demande à notre web service.
+- Des routes un peu plus concrètes pour les 5 méthodes du CRUD qui retournerons un simple message différent avec le/les paramètre(s) passé(s) et le statut approprié.
+**Aides :**
+> La fonction mux.Vars(*http.Request) retourne un tableau associatif de chaine des paramètres passé en paramètre.
 
 Les statuts valides du package net/http GO sont :
 o	GET : http.StatusOK
@@ -53,43 +53,44 @@ o	POST : http.StatusAccepted ou http.StatusOKt
 o	PUT : http.StatusCreated
 o	DELETE : http.StatusOKt
 
-Exercice 3 :
--	Standardiser la réponse et la renvoyer au format JSON comme suit :
-o	ReponseAPI : { ‘‘Meta’’ : {}, ‘’Data’’ : ‘’ ‘’ }
-o	Meta { ‘’Objet’’ : ‘’…’’,’’Total’’ :0,’’Offset’’ :0,’’Count’’ :0}
-o	Data : la chaine réponse
+#### Exercice 3 :
+- Standardiser la réponse et la renvoyer au format JSON comme suit :
+	- ReponseAPI : { ‘‘Meta’’ : {}, ‘’Data’’ : ‘’ ‘’ }
+	- Meta { ‘’Objet’’ : ‘’…’’,’’Total’’ :0,’’Offset’’ :0,’’Count’’ :0}
+	- Data : la chaine réponse
 
-Aide : 
+**Aide : **
+
 En renvoyant un json en réponse, il faut penser à prévenir le navigateur à l’aide d’un header que la réponse sera formater Json :
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+> w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 
-
-Exercice 4 : 
--	Prérequis exercice précédent
--	Définir l’ensemble des routes du web service (pour le CRUD contacts et vidéos) avec une fonction distincte par route qui pour le moment renvoi juste un message standardisé.
+#### Exercice 4 : 
+- Prérequis exercice précédent
+- Définir l’ensemble des routes du web service (pour le CRUD contacts et vidéos) avec une fonction distincte par route qui pour le moment renvoi juste un message standardisé.
 
 ### 2.	Interroger une Base de donnés
 
 Dans cette étape nous allons créer un accès à un serveur SQL, pour pouvoir interroger une base de données.
 Modéliser les contacts en BDD : ID, Nom, Prénom
 
-Exercice 1 :
--	Réaliser un une connexion sans package autre que celui de base et le driver MSSQL
+#### Exercice 1 :
+- Réaliser un une connexion sans package autre que celui de base et le driver MSSQL
 
-Aides :
-	Driver utilisé pour se connecter au MSSQL : https://github.com/denisenkom/go-mssqldb
-	Chaine de connexion :
-o	sqlserver://user:password@instance:port?database=base&encrypt=disable&parseTime=true
+**Aides :**
 
-Nb : liste des drivers DB gérés : https://github.com/golang/go/wiki/SQLDrivers
+Driver utilisé pour se connecter au MSSQL : https://github.com/denisenkom/go-mssqldb
+> Chaine de connexion :
+> sqlserver://user:password@instance:port?database=base&encrypt=disable&parseTime=true
 
-Exercice 2 :
--	Réaliser une structure pour inscrire les informations de connexion
--	Réaliser une fonction de connexion
--	Réaliser une fonction pour lire la liste des enregistrements
--	Réaliser une fonction pour lire un enregistrement
+*Nb : liste des drivers DB gérés : https://github.com/golang/go/wiki/SQLDrivers*
 
-Aides : 
+#### Exercice 2 :
+- Réaliser une structure pour inscrire les informations de connexion
+- Réaliser une fonction de connexion
+- Réaliser une fonction pour lire la liste des enregistrements
+- Réaliser une fonction pour lire un enregistrement
+
+**Aides :**
 ```
 type DatabaseSetting struct {
     SettingName  string 
@@ -103,10 +104,10 @@ type DatabaseSetting struct {
 }
 ```
 
-Exercice 3 :
--	Ajouter / modifier / Supprimer des enregistrements
-Exercice 4 :
--	Prérequis exercice précédent.
+#### Exercice 3 :
+- Ajouter / modifier / Supprimer des enregistrements
+#### Exercice 4 :
+- Prérequis exercice précédent.
 -	Modéliser la vidéothèque 
 -	Définir un ensemble de fonctions répondant au CRUD pour la vidéothèque
  
@@ -114,13 +115,14 @@ Exercice 4 :
 
 Cette étape a pour but de comprendre le fonctionnement des packages, leur utilisation et la portée des variables, interface et fonctions.
 
-Exercice 1 :
--	Réalisation d’un package settings :
-o	Définir une structure devant supporter le paramétrage.
--	Réaliser une fonction qui alimente une variable locale au package.
--	Réaliser une fonction qui renverra la variable et l’afficher.
+#### Exercice 1 :
+- Réalisation d’un package settings :
+	- Définir une structure devant supporter le paramétrage.
+- Réaliser une fonction qui alimente une variable locale au package.
+- Réaliser une fonction qui renverra la variable et l’afficher.
 
-Aides :
+**Aides :**
+```
 type ServeurSetting struct {
     Environnement struct {
         Name string `json:"name"`
@@ -132,16 +134,18 @@ type ServeurSetting struct {
         LevelLogger   int              `json:"levelLogger"`
     } `json:"environnement"`
 }
+```
 
-Exercice 2 :
--	Réaliser un fichier *.json qui reprendra les valeurs renseigné en dur. 
--	Réaliser une fonction qui permet : 
-o	D’ouvrir et récupérer le contenu du fichier json.
-o	Sérialiser et alimenter le fichier json dans la variable
+#### Exercice 2 :
+- Réaliser un fichier *.json qui reprendra les valeurs renseigné en dur. 
+- Réaliser une fonction qui permet : 
+	- D’ouvrir et récupérer le contenu du fichier json.
+	- Sérialiser et alimenter le fichier json dans la variable
 
-Aides :
+**Aides :**
+	
 	Le fichier settings.json sera à placer au niveau du main.go.	
-	//********* Exemple d'un json  ******************
+```	
 {
     "environnement":{
         "name" : "Dev",
