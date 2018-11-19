@@ -1,9 +1,9 @@
 # Création d’un Web Service simpliste en GO
-## Description :
+**Description :**
 Web Service de gestion d’une Vidéothèque avec gestion des prêts.
 Utilisation au maximum des package de base du Go à quelques exceptions.
 
-Le besoin :
+**Le besoin :**
 -	Lister les films de la vidéothèque (avec filtre et tri)
 -	CRUD d’une vidéo (Create, Read, Update, Delete)
 -	Lister nos contacts
@@ -17,7 +17,7 @@ Le projet va s’orienter autour de ce besoin en se découpant en plusieurs exer
 NB : Le correctif de chaque exercice est mis à disposition ici : 
 
  
-1.	Création d’un serveur web et de ses routes associées (utilisation du package gorilla/mux).
+### 1.	Création d’un serveur web et de ses routes associées (utilisation du package gorilla/mux).
 
 Pour rappel, d’un point vu purement conventionnel les méthodes suivantes, pour le CRUD, sont associées :
 -	PUT : Create
@@ -68,7 +68,7 @@ Exercice 4 :
 -	Prérequis exercice précédent
 -	Définir l’ensemble des routes du web service (pour le CRUD contacts et vidéos) avec une fonction distincte par route qui pour le moment renvoi juste un message standardisé.
 
-2.	Interroger une Base de donnés
+### 2.	Interroger une Base de donnés
 
 Dans cette étape nous allons créer un accès à un serveur SQL, pour pouvoir interroger une base de données.
 Modéliser les contacts en BDD : ID, Nom, Prénom
@@ -110,7 +110,7 @@ Exercice 4 :
 -	Modéliser la vidéothèque 
 -	Définir un ensemble de fonctions répondant au CRUD pour la vidéothèque
  
-3.	Réaliser un package
+### 3.	Réaliser un package
 
 Cette étape a pour but de comprendre le fonctionnement des packages, leur utilisation et la portée des variables, interface et fonctions.
 
@@ -160,7 +160,7 @@ Exercice 3 :
 o	Plusieurs configurations d’environnement
 o	En modifiant la fonction de chargement en passant en paramètre d’entrée le nom de la configuration à charger
  
-4.	Packaging et assemblage des étapes précédentes pour réaliser notre web service
+### 4.	Packaging et assemblage des étapes précédentes pour réaliser notre web service
 
 Exercice 1 :
 -	Prérequis :
