@@ -13,9 +13,6 @@ Utilisation au maximum des package de base du Go à quelques exceptions.
 	- Connaitre le stock de notre vidéothèque
 
 Le projet va s’orienter autour de ce besoin en se découpant en plusieurs exercices simples qui donneront forme à notre Web Service.
-
-NB : Le correctif de chaque exercice est mis à disposition ici : 
-
  
 ### 1.	Création d’un serveur web et de ses routes associées (utilisation du package gorilla/mux).
 
@@ -30,10 +27,13 @@ Avant de commencer il faut définir nos ressources (routes) et le fonctionnement
 - Routes pour gérer les prêts
 
 #### Exercice 1 :
--	Création d’un serveur web sur un port d’écoute en l’interrogeant, le programme doit nous retourner un message « Hello Ernesto ».
-Aides :
-Le routeur est géré avec le routeur du package gorilla/mux.
-A l’instanciation du routeur StrictSlash() lorsqu’il est à true redirige les routes du types /contacts/ vers /contacts.
+- Création d’un serveur web sur un port d’écoute en l’interrogeant, le programme doit nous retourner un message « Hello Ernesto ».
+
+**Aides :**
+
+> Le routeur est géré avec le routeur du package gorilla/mux.
+> A l’instanciation du routeur StrictSlash() lorsqu’il est à true redirige les routes du types /contacts/ vers /contacts.
+
 Pour définir une route nous utilisons plusieurs fonctions: 
 - Methods() définit la méthode gérer par notre route(GET, POST, PUT, …). 
 - Path() correspond à la route à laquelle on veut faire correspondre notre action. 
@@ -44,14 +44,15 @@ Pour définir une route nous utilisons plusieurs fonctions:
 - Prérequis exercice précédent
 - Récupération du/des paramètre(s) d’une demande à notre web service.
 - Des routes un peu plus concrètes pour les 5 méthodes du CRUD qui retournerons un simple message différent avec le/les paramètre(s) passé(s) et le statut approprié.
+
 **Aides :**
 > La fonction mux.Vars(*http.Request) retourne un tableau associatif de chaine des paramètres passé en paramètre.
 
 Les statuts valides du package net/http GO sont :
-o	GET : http.StatusOK
-o	POST : http.StatusAccepted ou http.StatusOKt
-o	PUT : http.StatusCreated
-o	DELETE : http.StatusOKt
+- GET : http.StatusOK
+- POST : http.StatusAccepted ou http.StatusOKt
+- PUT : http.StatusCreated
+- DELETE : http.StatusOKt
 
 #### Exercice 3 :
 - Standardiser la réponse et la renvoyer au format JSON comme suit :
