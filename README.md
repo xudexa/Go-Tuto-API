@@ -9,7 +9,7 @@ Utilisation au maximum des package de base du Go à quelques exceptions.
 - Lister nos contacts
 - CRUD d’un contact
 - Gestion des prêts :
-	- Prêt et Retour d’une vidéo
+    - Prêt et Retour d’une vidéo
 	- Connaitre le stock de notre vidéothèque
 
 Le projet va s’orienter autour de ce besoin en se découpant en plusieurs exercices simples qui donneront forme à notre Web Service.
@@ -21,6 +21,7 @@ Pour rappel, d’un point vu purement conventionnel les méthodes suivantes, pou
 - POST : Update
 - GET : Read
 - DELETE : no coment
+
 Avant de commencer il faut définir nos ressources (routes) et le fonctionnement de notre Web Service :
 - Routes pour gérer les vidéos
 - Routes pour gérer les contacts
@@ -107,6 +108,7 @@ type DatabaseSetting struct {
 
 #### Exercice 3 :
 - Ajouter / modifier / Supprimer des enregistrements
+
 #### Exercice 4 :
 - Prérequis exercice précédent.
 - Modéliser la vidéothèque 
